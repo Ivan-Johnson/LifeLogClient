@@ -16,8 +16,10 @@ def main():
     #YYYY-MM-DD-HH-MM-SS\tweight
     with open('data.csv', newline='') as fd:
         reader = csv.reader(fd, skipinitialspace=True, delimiter='\t', strict=True)
+        i = 0
         for row in reader:
-            print(row)
+            i += 1
+            print(f'\r{i}: {row}', end='')
             assert(len(row)==2)
             sdate = row[0]
             weight = float(row[1])
@@ -43,6 +45,7 @@ def main():
             if response.status_code != 201:
                 import pdb; pdb.set_trace()
                 print(f"{response.status_code}\t{sdate}\t{str(weight)}\t{cacheid}")
+        print('')
 
 assert(__name__ == "__main__")
 main()
